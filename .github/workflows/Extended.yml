@@ -1,0 +1,20 @@
+#include <Array.au3>
+    #include <_XLSXReadToArray.au3>
+    
+    local $a, $t, $Error, $Extended
+    $t = TimerInit()
+    InetGet("http://go.microsoft.com/fwlink/?LinkID=245778", @WindowsDir & "\Temp\BulletinSearch.xlsx")
+    $a = _XLSXReadToArray(@WindowsDir & "\Temp\BulletinSearch.xlsx", 0, 0, 0)
+    $t = TimerDiff($t)
+    _ArrayDisplay($a, $t)
+    
+    ;;or
+    $t = TimerInit()
+    $a = _XLSXReadToArray(@WindowsDir & "\Temp\BulletinSearch.xlsx", 0, 2, 11)
+    $Error = @Error
+    $Extended = @Extended
+    $t = TimerDiff($t)
+    ConsoleWrite("Timer = " & $t & @LF)
+    ConsoleWrite("Return = " & $a & " - $Error = " & $Error & " - $Extended = " & $Extended & @LF)
+    
+    exit
